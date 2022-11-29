@@ -37,10 +37,8 @@ len(lines)
 
 index_rv = []
 
-#index_rv = [1 if re.findall(r'\bARANCEL\b', line) else 0 for line in lines]
-
 for line in lines:
-    if re.findall(r'\bARANCEL\b', line):
+    if re.findall(r'\bVENTAS C/DESCUENTO CONTADO\b', line):
         index_rv.append(1)
     else:
         index_rv.append(0)
@@ -53,9 +51,10 @@ print(index_rv)
 
 result = []
 for i in index_rv:
-    stock = lines[i:i+10]
+    stock = lines[i:i+1]
+    #indice_c = cadena.index('c')
     stock = stock[0].split(' $ ') + stock[1:]
-    result.append([p.strip() for p in stock])
+    result.append(stock)
     
 df = pd.DataFrame(result, columns = ['Descripcion','Importe'])
 
